@@ -40,11 +40,11 @@ jobs:
 
       # Set up trusted setup (download pre-existing ptau file)
       - name: Download Powers of Tau File
-        run: wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_12.ptau -O pot12_final.ptau
+        run: wget https://z.cash/downloads/powersOfTau28_final.ptau -O pot_final.ptau
 
       - name: Perform Trusted Setup
         run: |
-          snarkjs groth16 setup Equation.r1cs pot12_final.ptau Equation_0000.zkey
+          snarkjs groth16 setup Equation.r1cs pot_final.ptau Equation_0000.zkey
           snarkjs zkey contribute Equation_0000.zkey Equation_final.zkey --name="First contribution" -v
 
       # Export verification key
