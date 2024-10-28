@@ -1,5 +1,5 @@
 template Equation() {
-    signal private input x;
+    signal input x;
     signal input result;
 
     signal x_squared <== x * x;
