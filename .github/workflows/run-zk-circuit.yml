@@ -40,7 +40,7 @@ jobs:
 
       # Set up trusted setup (download pre-existing ptau file)
       - name: Download Powers of Tau File
-        run: wget https://z.cash/downloads/powersOfTau28_final.ptau -O pot_final.ptau
+        run: wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_16.ptau -O pot_final.ptau
 
       - name: Perform Trusted Setup
         run: |
