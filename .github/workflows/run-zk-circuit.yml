@@ -43,7 +43,7 @@ jobs:
         
          on:[push]
         
-        jobs :
+        uses:
           trusted_setup:
             runs-on: ubuntu-latest
             steps:
