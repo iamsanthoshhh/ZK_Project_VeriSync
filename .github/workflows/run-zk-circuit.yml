@@ -50,6 +50,9 @@ jobs:
               - name: Checkout code
                 uses: actions/checkout@v2
         
+              - name: Install snarkjs
+                run: npm install -g snarkjs
+        
               - name: Create new Powers of Tau File
                 run: |
                   snarkjs powersoftau new bn128 14 pot14_0000.ptau -v
@@ -57,11 +60,12 @@ jobs:
               - name: Contribute to Powers of Tau File
                 run: |
                   snarkjs powersoftau contribute pot14_0000.ptau pot14_0001.ptau --name="First contribution" -v
-
-      - name: Perform Trusted Setup
-        run: |
-          snarkjs groth16 setup Equation.r1cs pot14_0001.ptau Equation_0000.zkey
-          snarkjs zkey contribute Equation_0000.zkey Equation_final.zkey --name="Second contribution" -v
+        
+              - name: Perform Trusted Setup
+                run: |
+                  snarkjs groth16 setup Equation.r1cs pot14_0001.ptau Equation_0000.zkey
+                  snarkjs zkey contribute Equation_0000.zkey Equation_final.zkey --name="Second contribution" -v
+        
 
 
       # Export verification key
