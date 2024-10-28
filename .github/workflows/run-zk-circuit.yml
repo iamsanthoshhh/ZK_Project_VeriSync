@@ -41,9 +41,9 @@ jobs:
       # Set up trusted setup (download pre-existing ptau file)
       - name: ZKProof Workflow
         
-         on:[push]
+        on: [push]
         
-        uses:
+        jobs:
           trusted_setup:
             runs-on: ubuntu-latest
             steps:
@@ -57,11 +57,12 @@ jobs:
               - name: Contribute to Powers of Tau File
                 run: |
                   snarkjs powersoftau contribute pot14_0000.ptau pot14_0001.ptau --name="First contribution" -v
-        
-              - name: Perform Trusted Setup
-                run: |
-                  snarkjs groth16 setup Equation.r1cs pot14_0001.ptau Equation_0000.zkey
-                  snarkjs zkey contribute Equation_0000.zkey Equation_final.zkey --name="Second contribution" -v
+
+      - name: Perform Trusted Setup
+        run: |
+          snarkjs groth16 setup Equation.r1cs pot14_0001.ptau Equation_0000.zkey
+          snarkjs zkey contribute Equation_0000.zkey Equation_final.zkey --name="Second contribution" -v
+
 
       # Export verification key
       - name: Export Verification Key
