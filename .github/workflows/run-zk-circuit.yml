@@ -39,13 +39,29 @@ jobs:
         run: circom Equation.circom --r1cs --wasm --sym
 
       # Set up trusted setup (download pre-existing ptau file)
-      - name: Download Powers of Tau File
-        run: wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_16.ptau -O pot_final.ptau
-
-      - name: Perform Trusted Setup
-        run: |
-          snarkjs groth16 setup Equation.r1cs pot_final.ptau Equation_0000.zkey
-          snarkjs zkey contribute Equation_0000.zkey Equation_final.zkey --name="First contribution" -v
+      - name: ZKProof Workflow
+        
+         on:[push]
+        
+        jobs :
+          trusted_setup:
+            runs-on: ubuntu-latest
+            steps:
+              - name: Checkout code
+                uses: actions/checkout@v2
+        
+              - name: Create new Powers of Tau File
+                run: |
+                  snarkjs powersoftau new bn128 14 pot14_0000.ptau -v
+        
+              - name: Contribute to Powers of Tau File
+                run: |
+                  snarkjs powersoftau contribute pot14_0000.ptau pot14_0001.ptau --name="First contribution" -v
+        
+              - name: Perform Trusted Setup
+                run: |
+                  snarkjs groth16 setup Equation.r1cs pot14_0001.ptau Equation_0000.zkey
+                  snarkjs zkey contribute Equation_0000.zkey Equation_final.zkey --name="Second contribution" -v
 
       # Export verification key
       - name: Export Verification Key
