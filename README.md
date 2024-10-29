@@ -19,8 +19,8 @@ This project focuses on implementing a zero-knowledge (ZK) proof system to demon
 
 1. **Clone the Repository**   
    ```bash
-  *** git clone <repository-url>
-   cd ZK_Project_VeriSync ***
+   git clone <repository-url>
+   cd ZK_Project_VeriSync 
 
   📝 Findings
 Inputs Used: The input value for 𝑥
