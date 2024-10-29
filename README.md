@@ -9,7 +9,7 @@ This project focuses on implementing a zero-knowledge (ZK) proof system to demon
 - **Objective**: Prove knowledge of \(x\) such that \(x^2 + x + 7 = 9\) without disclosing \(x\).
 - **ZK Protocol Chosen**: Groth16 due to its efficient proof size and fast verification times.
 
-## Installation
+## Installations
 
 ### Prerequisites
 - **Node.js** (version 16 or higher)
